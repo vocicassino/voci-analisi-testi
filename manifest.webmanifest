@@ -1,0 +1,12 @@
+{
+  "name": "Voci di Cassino — Analisi Testi",
+  "short_name": "Analisi Testi",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f2",
+  "theme_color": "#101f32",
+  "description": "Analisi locale di caratteri invisibili e suggerimenti editoriali, senza rilevamento di watermark statistici.",
+  "icons": [{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
