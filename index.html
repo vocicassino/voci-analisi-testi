@@ -17,7 +17,7 @@
     <div class="container head-row">
       <a class="brand" href="./" aria-label="Voci di Cassino Analisi Testi">
         <span class="mark" aria-hidden="true">V</span>
-        <span><strong>VOCI DI CASSINO</strong><small>LABORATORIO TESTUALE</small></span>
+        <span><strong>VOCI DI CASSINO</strong><small>LABORATORIO TESTUALE · V2</small></span>
       </a>
       <span class="header-note"><span class="live-dot" aria-hidden="true"></span> Analisi locale · Nessun invio online</span>
     </div>
@@ -27,7 +27,7 @@
     <section class="hero">
       <div class="eyebrow"><span class="line"></span> STRUMENTI PER LA REDAZIONE</div>
       <h1>Ogni parola, <em>sotto esame.</em></h1>
-      <p>Analizza anomalie tecniche, caratteri invisibili e formule ripetitive. Rivedi il testo prima di pubblicarlo, senza caricarlo su server esterni.</p>
+      <p>Esamina marcatori Unicode e sequenze nascoste, controlla anomalie di formato e rivedi lo stile giornalistico. Tutto sul tuo dispositivo, senza inviare l’articolo online.</p>
     </section>
 
     <aside class="truth" role="note" aria-label="Limiti dell'analisi">
@@ -47,11 +47,19 @@
       <section class="panel report-panel" aria-labelledby="reportTitle">
         <div class="panel-header"><div><span class="overline">02 / RISULTATI</span><h2 id="reportTitle">Rapporto di analisi</h2></div><span class="pill muted" id="statusLabel">Da analizzare</span></div>
         <div class="metrics">
+          <div class="metric"><span>MARCATORI UNICODE</span><strong id="markerCount">—</strong><small>Da esaminare, non watermark confermati</small></div>
           <div class="metric"><span>ANOMALIE TECNICHE</span><strong id="technicalCount">—</strong><small>Unicode e alfabeti</small></div>
           <div class="metric"><span>SPUNTI EDITORIALI</span><strong id="editorialCount">—</strong><small>Solo suggerimenti</small></div><div class="metric"><span>RESIDUI DI FORMATO</span><strong id="traceCount">—</strong><small>Marcature e introduzioni</small></div>
         </div>
         <div class="provenance"><span class="provenance-icon" aria-hidden="true">?</span><div><strong>Filigrana statistica</strong><p><span id="watermarkStatus">Non verificabile con questa applicazione</span></p></div></div>
-        <nav class="tabs" aria-label="Sezioni del rapporto"><button type="button" class="tab active" data-tab="anomalies" aria-pressed="true">Anomalie</button><button type="button" class="tab" data-tab="traces" aria-pressed="false">Residui</button><button type="button" class="tab" data-tab="tips" aria-pressed="false">Stile</button><button type="button" class="tab" data-tab="clean" aria-pressed="false">Revisione</button></nav>
+        <nav class="tabs" aria-label="Sezioni del rapporto">
+          <button type="button" class="tab active" data-tab="markers" aria-pressed="true">Marcatori</button>
+          <button type="button" class="tab" data-tab="anomalies" aria-pressed="false">Anomalie</button>
+          <button type="button" class="tab" data-tab="traces" aria-pressed="false">Residui</button>
+          <button type="button" class="tab" data-tab="tips" aria-pressed="false">Stile</button>
+          <button type="button" class="tab" data-tab="journalism" aria-pressed="false">Giornalismo</button>
+          <button type="button" class="tab" data-tab="clean" aria-pressed="false">Pulizia</button>
+        </nav>
         <div id="reportBody" class="report-body" aria-live="polite"><div class="empty-state"><span aria-hidden="true">⌕</span><h3>Il tuo rapporto apparirà qui</h3><p>Incolla un testo e avvia l’analisi.</p></div></div>
       </section>
     </div>

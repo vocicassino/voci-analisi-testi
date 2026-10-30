@@ -1,39 +1,43 @@
-# Voci di Cassino — Analisi Testi
+# Voci di Cassino – Analisi Testi V2
 
-Webapp statica per GitHub Pages. Senza API, senza registrazione, senza invio del testo a server esterni.
+Webapp statica per GitHub Pages, gratuita, senza registrazione e senza chiavi API. Il testo incollato viene elaborato **localmente nel browser** e non è inviato a servizi di analisi esterni.
 
-## Cosa può fare
+## Novità della versione 2
 
-- Evidenziare caratteri invisibili o non stampabili, spazi non separabili e controlli Unicode direzionali.
-- Segnalare lettere latine mischiate a caratteri cirillici/greci nella stessa parola.
-- Segnalare residui di formato (Markdown, marcature di citazione) e frasi di accompagnamento eventualmente rimaste dal dialogo.
-- Proporre revisioni editoriali per espressioni convenzionali, ripetizioni e frasi eccessivamente lunghe.
-- Ripulire in modo conservativo soltanto i caratteri tecnici eliminabili senza cambiare il significato del testo; alcuni caratteri vengono volutamente lasciati intatti (per esempio ZWJ nelle emoji).
-- Consentire copia o esportazione del risultato modificato in `.txt`.
-- Funzionare offline dopo una prima visita su HTTPS, con una cache dei soli file dell'applicazione.
+- **Marcatori Unicode**: scansione aggiuntiva dei caratteri zero-width, controlli direzionali, spazi tipografici poco comuni, caratteri di riempimento, selettori di variante e caratteri Unicode TAG.
+- **Sequenze concentrate**: distingue alcuni gruppi consecutivi di caratteri invisibili e mostra i codici Unicode individuati. Se esiste un testo nei TAG, lo rende visibile nel rapporto.
+- **Meno falsi positivi**: riconosce le normali sequenze di emoji con ZWJ, selettori e bandiere regionali basate su TAG.
+- **Giornalismo**: nuova checklist editoriale con attenzione ad attribuzioni, date relative, presunzione di innocenza, fonti e link SegnalaFacile.
+- **Pulizia tecnica**: mantiene una versione modificabile da copiare o esportare in `.txt`, senza cambiare volutamente il significato.
+- **Aggiornamento offline**: la cache dell'app viene aggiornata alla versione 2.
 
-## Limiti fondamentali
+## Limite fondamentale: watermark statistici
 
-**NON rileva e NON rimuove watermark statistici come textGrain.** Non è un classificatore di origine IA, non può stabilire l'autore di un testo e non fornisce una certificazione «testo non riconoscibile come IA». Gli indizi stilistici sono comuni anche in testi scritti da persone. Nessuna pulizia di caratteri Unicode garantisce l'assenza di un segnale di provenienza.
+L'app **non rileva né rimuove watermark statistici**, incluso textGrain di OpenAI. Non esiste una verifica affidabile dell'origine IA di un testo basata soltanto su stile, marcatori Unicode o loro assenza. Un segnale Unicode trovato è soltanto un elemento tecnico da controllare: può dipendere da formattazione, lingue o emoji e **non è prova di una filigrana ChatGPT**. Nessun risultato dell'app certifica l'origine umana del testo.
 
-Fonti: [OpenAI, 5 ottobre 2026](https://openai.com/it-IT/index/eu-text-provenance/) e [OpenAI Help Center](https://help.openai.com/it-it/articles/8912793-provenance-signals-in-openai-generated-content).
+## Come aggiornare il repository già pubblicato
 
-## Pubblicazione su GitHub Pages
+Repository dell'utente: [vocicassino/voci-analisi-testi](https://github.com/vocicassino/voci-analisi-testi).
 
-1. Crea un nuovo repository su [GitHub](https://github.com/new), per esempio `voci-analisi-testi`, impostato su **Public**.
-2. Carica **tutti i file** contenuti nello ZIP direttamente nella cartella principale del repository (non caricare lo ZIP come file unico).
-3. Apri **Settings → Pages**, in «Build and deployment» scegli **Deploy from a branch** e la branch `main`, cartella **/(root)**; salva.
-4. L'app sarà disponibile all'indirizzo `https://TUO-USERNAME.github.io/voci-analisi-testi/` quando GitHub Pages avrà concluso la pubblicazione. Copia l'URL indicato dalla schermata Pages, senza indovinarlo.
-5. Da Chrome Android scegli **Aggiungi a schermata Home** per aprirla come app.
+1. Scarica `voci-analisi-testi-v2.zip` e **estrailo** sul telefono o PC.
+2. Apri `https://github.com/vocicassino/voci-analisi-testi` con l'account GitHub che ha i permessi di modifica.
+3. Nella branch `main`, apri **Add file → Upload files** (su telefono, se la voce non è visibile, usa la versione desktop del browser).
+4. Seleziona i file estratti **dalla cartella interna**, mantenendo i percorsi: `index.html`, `app.js`, `analyzer.mjs`, `marker-audit.mjs`, `styles.css`, `sw.js`, `manifest.webmanifest`, `icon.svg`, `README.md`. La cartella `tests` è facoltativa per il funzionamento pubblico, ma consigliata.
+5. Quando GitHub chiede di sovrascrivere file già presenti, accetta per aggiornare la versione precedente, quindi conferma con **Commit changes**. In alternativa aggiorna i singoli file con l'editor GitHub.
+6. La pagina pubblica resta `https://vocicassino.github.io/voci-analisi-testi/`. Se l'interfaccia rimane V1, aggiorna la pagina, chiudi e riapri il browser; i vecchi file della PWA potrebbero essere ancora in cache.
 
-Lo stesso progetto può essere distribuito tramite qualsiasi host statico. GitHub Pages è un hosting pubblico per il codice sorgente: non caricare dati riservati nei file del repository.
+**Nota:** se GitHub non permette di caricare file con lo stesso nome nella stessa cartella, utilizza il comando `Edit` per sostituire ciascun file, oppure una procedura `git` locale (`git add . && git commit ... && git push`). Non cancellare l'intero repository.
 
-## Prove locali
+## Test
 
-Puoi aprire `index.html` con un piccolo server statico, per esempio `python3 -m http.server 8000` e poi `http://localhost:8000/`.
+Con Node.js 20+:
 
-Esegui i test dell'analizzatore con Node.js: `node --test tests/analyzer.test.mjs`.
+```bash
+node --test tests/*.test.mjs
+```
+
+Sono previsti test sia per il vecchio analizzatore sia per il nuovo scanner di marcatori Unicode.
 
 ## Privacy
 
-Le parole incollate nel riquadro non vengono spedite, conservate in `localStorage` o scritte nella cache del service worker. La copia del testo e il download sono azioni esplicite dell'utente.
+Nessun testo viene salvato in `localStorage` o nella cache del service worker. La cache contiene solo file pubblici dell'applicazione. La copia e l'esportazione sono azioni esplicite dell'utente.
