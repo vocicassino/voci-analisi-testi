@@ -13,3 +13,13 @@
 .finding .notice{color:#475967;background:#f8fafb;border-radius:6px;padding:8px 10px;margin-top:7px}
 .finding .tag.warning{background:#fff3da;color:#835c21}
 @media(max-width:550px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric span{font-size:9px}.metric strong{font-size:28px}.scan-categories{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{column-gap:15px}.tab{font-size:12px}}
+
+/* Installazione PWA Android */
+.install-panel{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#edf6f2;border:1px solid #bcd8d1;border-radius:16px;padding:16px 20px;margin:20px 0 26px;flex-wrap:wrap}
+.install-copy{flex:1 1 220px}
+.install-copy strong{display:block;font-size:15px;color:#123d36;margin-bottom:5px}
+.install-copy p{font-size:13px;line-height:1.5;color:#355d58;margin:0}
+.install-panel .btn{background:#fff;color:#166b62;border:1px solid #bad0ca;flex-shrink:0}
+@media(max-width:480px){.install-panel{align-items:stretch}.install-panel .btn{width:100%}}
+
+#installPanel[hidden], #installBtn[hidden]{display:none !important}

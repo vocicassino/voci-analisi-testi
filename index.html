@@ -8,7 +8,8 @@
   <meta name="color-scheme" content="light">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <link rel="stylesheet" href="./styles.css">
   <title>Voci di Cassino — Analisi Testi</title>
 </head>
@@ -17,7 +18,7 @@
     <div class="container head-row">
       <a class="brand" href="./" aria-label="Voci di Cassino Analisi Testi">
         <span class="mark" aria-hidden="true">V</span>
-        <span><strong>VOCI DI CASSINO</strong><small>LABORATORIO TESTUALE · V2</small></span>
+        <span><strong>VOCI DI CASSINO</strong><small>LABORATORIO TESTUALE · V3</small></span>
       </a>
       <span class="header-note"><span class="live-dot" aria-hidden="true"></span> Analisi locale · Nessun invio online</span>
     </div>
@@ -28,6 +29,14 @@
       <div class="eyebrow"><span class="line"></span> STRUMENTI PER LA REDAZIONE</div>
       <h1>Ogni parola, <em>sotto esame.</em></h1>
       <p>Esamina marcatori Unicode e sequenze nascoste, controlla anomalie di formato e rivedi lo stile giornalistico. Tutto sul tuo dispositivo, senza inviare l’articolo online.</p>
+    </section>
+
+    <section class="install-panel" id="installPanel" aria-label="Installazione sul telefono">
+      <div class="install-copy">
+        <strong>Installa Analisi Testi sul telefono</strong>
+        <p id="installStatus">Da Chrome Android puoi aggiungere l’app alla schermata Home.</p>
+      </div>
+      <button class="btn ghost" type="button" id="installBtn">Come installare</button>
     </section>
 
     <aside class="truth" role="note" aria-label="Limiti dell'analisi">

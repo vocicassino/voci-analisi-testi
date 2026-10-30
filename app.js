@@ -192,3 +192,40 @@ $('#exampleBtn').addEventListener('click',()=>{
 document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{activeTab=btn.dataset.tab;render();}));
 setCounts();
 if('serviceWorker' in navigator && location.protocol==='https:') window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+
+// L'installazione PWA e' opzionale: il pulsante spiega i passi anche se
+// Chrome non espone l'evento beforeinstallprompt.
+let pendingInstallPrompt = null;
+const installPanel = document.querySelector('#installPanel');
+const installBtn = document.querySelector('#installBtn');
+const installStatus = document.querySelector('#installStatus');
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  installPanel.hidden = true;
+} else {
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    pendingInstallPrompt = event;
+    installBtn.textContent = 'Installa app';
+    installStatus.textContent = 'Questa versione può essere installata come applicazione dal browser.';
+  });
+  installBtn.addEventListener('click', async () => {
+    if (pendingInstallPrompt) {
+      const event = pendingInstallPrompt;
+      pendingInstallPrompt = null;
+      await event.prompt();
+      const choice = await event.userChoice;
+      if (choice.outcome === 'accepted') {
+        installStatus.textContent = 'Installazione richiesta. Controlla la schermata Home.';
+      } else {
+        installStatus.textContent = 'Per installare in seguito, usa il menu ⋮ di Chrome.';
+      }
+      installBtn.textContent = 'Come installare';
+      return;
+    }
+    installStatus.textContent = 'Apri questa pagina in Chrome (non dentro Facebook o ChatGPT), tocca ⋮ e scegli «Installa app» oppure «Aggiungi a schermata Home». Se non compare, aggiorna la pagina.';
+  });
+  window.addEventListener('appinstalled', () => {
+    installStatus.textContent = 'Applicazione installata. Puoi aprirla dalla schermata Home.';
+    installBtn.hidden = true;
+  });
+}
